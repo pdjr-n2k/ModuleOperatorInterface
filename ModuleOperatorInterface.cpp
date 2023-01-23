@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <Button.h>
-#include "ModuleOperatorInterface.h"
+#include <ModuleOperatorInterface.h>
   
 ModuleOperatorInterface::ModuleOperatorInterface(ModuleOperatorInterfaceClient **modeHandlers, unsigned long revertInterval) {
   this->modeHandlers = modeHandlers;

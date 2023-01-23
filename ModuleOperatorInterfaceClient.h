@@ -1,5 +1,5 @@
-#ifndef MODULE_INTERFACE_HANDLER_H
-#define MODULE_INTERFACE_HANDLER_H
+#ifndef MODULE_OPERATOR_INTERFACE_CLIENT_H
+#define MODULE_OPERATOR_INTERFACE_CLIENT_H
 
 /**
  * @brief Abstract class defining interface used by ModuleInterface

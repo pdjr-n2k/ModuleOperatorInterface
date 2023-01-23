@@ -1,7 +1,7 @@
-#ifndef MODULE_INTERFACE_H
-#define MODULE_INTERFACE_H
+#ifndef MODULE_OPERATOR_INTERFACE_H
+#define MODULE_OPERATOR_INTERFACE_H
 
-#include "ModuleOperatorInterfaceClient.h"
+#include <ModuleOperatorInterfaceClient.h>
 
 class ModuleOperatorInterface {
 
