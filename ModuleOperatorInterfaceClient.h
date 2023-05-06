@@ -8,7 +8,7 @@
  * Each mode supported by @ref ModuleInterface is handled by a class
  * which must implement this interface, probably by sub-classing it.
  */
-class tModuleOperatorInterfaceClient {
+class ModuleOperatorInterfaceClient {
 
   public:
 

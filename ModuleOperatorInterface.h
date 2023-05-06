@@ -3,7 +3,7 @@
 
 #include <ModuleOperatorInterfaceClient.h>
 
-class tModuleOperatorInterface {
+class ModuleOperatorInterface {
 
   public:
     /**
@@ -24,7 +24,7 @@ class tModuleOperatorInterface {
      *                         before the current operating mode
      *                         reverts to mode zero.
      */
-    tModuleOperatorInterface(tModuleOperatorInterfaceClient **modeHandlers, unsigned long revertInterval = 30000);
+    ModuleOperatorInterface(ModuleOperatorInterfaceClient **modeHandlers, unsigned long revertInterval = 30000);
 
     /**
      * @brief Get the current operating mode.
@@ -64,7 +64,7 @@ class tModuleOperatorInterface {
     void revertModeMaybe();
     
   private:
-    tModuleOperatorInterfaceClient **modeHandlers;
+    ModuleOperatorInterfaceClient **modeHandlers;
     unsigned int currentMode;
     int currentAddress;
     unsigned long buttonPressedAt;

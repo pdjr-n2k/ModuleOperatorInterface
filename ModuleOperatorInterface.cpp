@@ -2,7 +2,7 @@
 #include <Button.h>
 #include <ModuleOperatorInterface.h>
   
-tModuleOperatorInterface::tModuleOperatorInterface(tModuleOperatorInterfaceClient **modeHandlers, unsigned long revertInterval) {
+ModuleOperatorInterface::ModuleOperatorInterface(ModuleOperatorInterfaceClient **modeHandlers, unsigned long revertInterval) {
   this->modeHandlers = modeHandlers;
   this->revertInterval = revertInterval;
   this->currentMode = 0;
@@ -10,22 +10,22 @@ tModuleOperatorInterface::tModuleOperatorInterface(tModuleOperatorInterfaceClien
   this->buttonPressedAt = 0UL;
 }
 
-int tModuleOperatorInterface::getCurrentMode() {
+int ModuleOperatorInterface::getCurrentMode() {
   return(this->currentMode);
 }
 
-unsigned long tModuleOperatorInterface::getButtonPressedAt() {
+unsigned long ModuleOperatorInterface::getButtonPressedAt() {
   return(this->buttonPressedAt);
 }
 
-void tModuleOperatorInterface::revertModeMaybe() {
+void ModuleOperatorInterface::revertModeMaybe() {
   if (millis() > (this->buttonPressedAt + this->revertInterval)) {
     this->currentMode = 0;
     this->currentAddress = -1;
   }
 }
     
-tModuleOperatorInterface::EventOutcome tModuleOperatorInterface::handleButtonEvent(bool buttonState, unsigned char value) {
+ModuleOperatorInterface::EventOutcome ModuleOperatorInterface::handleButtonEvent(bool buttonState, unsigned char value) {
   EventOutcome retval = MODE_CHANGE;
   unsigned long now = millis();
 
