@@ -25,7 +25,7 @@ class ModuleOperatorInterfaceClient {
      * @return true   - the address is valid.
      * @return false  - the address is not valid.
      */
-    virtual bool validateAddress(unsigned char address) = 0;
+    virtual bool validateAddress(unsigned int address) = 0;
 
     /**
      * @brief Process an *address* and an associated *value*.
@@ -41,7 +41,7 @@ class ModuleOperatorInterfaceClient {
      *                  is invalid, maybe the address/value combination
      *                  is invalid, maybe the invoked process failed.
      */
-    virtual bool processValue(unsigned char address, unsigned char value) = 0;
+    virtual bool processValue(unsigned int address, unsigned char value) = 0;
 };
 
 #endif
