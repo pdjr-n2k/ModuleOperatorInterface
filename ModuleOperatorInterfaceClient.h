@@ -1,3 +1,12 @@
+/**
+ * @file ModuleOperatorInterfaceClient.h
+ * @author Paul Reeve (preeve@pdjr.eu)
+ * @brief 
+ * @version 0.1
+ * @date 2023-05-10
+ * @copyright Copyright (c) 2023
+ */
+
 #ifndef MODULE_OPERATOR_INTERFACE_CLIENT_H
 #define MODULE_OPERATOR_INTERFACE_CLIENT_H
 

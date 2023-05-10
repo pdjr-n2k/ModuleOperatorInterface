@@ -1,8 +1,24 @@
+/**
+ * @file ModuleOperatorInterface.h
+ * @author Paul Reeve (preeve@pdjr.eu)
+ * @brief 
+ * @version 0.1
+ * @date 2023-05-10
+ * @copyright Copyright (c) 2023
+ */
+
 #ifndef MODULE_OPERATOR_INTERFACE_H
 #define MODULE_OPERATOR_INTERFACE_H
 
 #include <ModuleOperatorInterfaceClient.h>
 
+/**
+ * @brief ADT implementing an operator interface for NOP100-based modules.
+ *
+ * The user interface of a NOP100-based device consists of a DIL switch
+ * and momentary enter button and is primarily used for updating the
+ * module's configuration.
+ */
 class ModuleOperatorInterface {
 
   public:
