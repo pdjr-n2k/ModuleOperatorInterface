@@ -2,27 +2,15 @@
 
 ADT implementing an operator interface for NOP100-based modules.
 
-[ModuleOperatorInterface](#classModuleOperatorInterface) implements a multi-modal user interface based upon operation of an eight position DIL switch and momentary push-buton.
+[ModuleOperatorInterface](#classModuleOperatorInterface) implements a multi-modal user interface driven by an eight position DIL switch and a momentary push-buton. User interaction processing is triggered by the [handleButtonEvent()](#classModuleOperatorInterface_1a62b30f88d2cfbdf12632fda30baec287) method which takes button state and DIL switch values as its arguments.
 
-[ModuleOperatorInterface](#classModuleOperatorInterface) accepts button press and release events through a call to [handleButtonEvent()](#classModuleOperatorInterface_1a62b30f88d2cfbdf12632fda30baec287) which takes button state and DIL switch values as its arguments.
-
-The interface supports an arbitrary number of operating modes each delivered by a class that implements the ModuleOperatorIbterfaceClient interface. A single short button press allows the user to cycle through the available operating modes and so change the semantics of subsequent user interaction events.
+The interface supports an arbitrary number of operating modes each delivered by a client class that implements the [ModuleOperatorInterfaceClient](#classModuleOperatorInterfaceClient) interface. A single short button press allows the user to cycle through the available operating modes and so change the semantics of subsequent user interaction events.
 
 A user interaction event comprises a two-step protocol which when completed successfully returns two data values: *address* and *value*.
 
 This abstract class's performAction() method provides the functional link between a user interaction transaction and its implementation. A user transaction consists of two data values, *address* and *value*.
 
 Button short press - change mode Button long press - start transaction and set address parameter to the value of the DIL switch Button short press (after long press) - end transaction, set value parameter from DIL switch and call performAction().
-
-At any one time the interaction is in a particular operating mode with
-
-Substantive actions resulting from user interaction are processed by classes implementing the . One or more such classes must be passed to [ModuleOperatorInterface](#classModuleOperatorInterface) when it is instantiated, each establishing an operating modes as an and each such clien The user interface of a NOP100-based device consists of a DIL switch and momentary button. The momentary button can be operated with either a short-press or a long-press:
-
-LONG-PRESS: causes the value set on the DIL switch to be treated as a potential address
-
-This ADT implements mode-vased interaction: at any point in time the interface is in one of an arbitrary number of modes each of which has a dedicated handler class that implements the [ModuleOperatorInterfaceClient](#classModuleOperatorInterfaceClient) interface.
-
-model that is mode basedwith a basic two component data entry model in which the user can enter an address followed by a value. t is enter a value on the DIL switch and press the button for confirmation. This is extended to a two-stage protocol which involves entry of an address followed by entry of a value. around the notion of setting a value
 
 ## Summary
 
