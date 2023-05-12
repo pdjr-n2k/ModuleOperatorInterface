@@ -20,7 +20,8 @@
  * push-buton.
  * 
  * The interface supports an arbitrary number of operating modes each
- * delivered by a class that implements ModuleOperatorClientInterface.
+ * delivered by a class that implements the
+ * ModuleOperatorIbterfaceClient interface.
  * A single short button press allows the user to cycle through the
  * available operating modes and so change the semantics of subsequent
  * user interaction events.
