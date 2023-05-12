@@ -105,9 +105,9 @@ class ModuleOperatorInterface {
     ModuleOperatorInterface(ModuleOperatorInterfaceClient **modeHandlers, unsigned int revertInterval = 0);
 
     /**
-     * @brief Get the current operating mode.
+     * @brief Get the index in the modeHandlers array of the current operating mode.
      * 
-     * @return int - the index of current operating mode in the modeHandlers array.
+     * @return int - index of the current operating mode.
      */
     int getCurrentMode();
 

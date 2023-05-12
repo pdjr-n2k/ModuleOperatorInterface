@@ -29,7 +29,7 @@ model that is mode basedwith a basic two component data entry model in which the
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public  `[`ModuleOperatorInterface`](#classModuleOperatorInterface_1a00d07785822e52939616b63331cf59a1)`(`[`ModuleOperatorInterfaceClient`](#classModuleOperatorInterfaceClient)` ** modeHandlers,unsigned int revertInterval)` | Create a new ModuleInterface object.
-`public int `[`getCurrentMode`](#classModuleOperatorInterface_1a974eefcd01d49ebd2b8b75d23fc7c2e0)`()` | Get the current operating mode.
+`public int `[`getCurrentMode`](#classModuleOperatorInterface_1a974eefcd01d49ebd2b8b75d23fc7c2e0)`()` | Get the index in the modeHandlers array of the current operating mode.
 `public unsigned long `[`getButtonPressedAt`](#classModuleOperatorInterface_1a7aecf5e1d413e91f2d7615dbe54f11b6)`()` | Get the time in milliseconds of the last invocation of the [handleButtonEvent()](#classModuleOperatorInterface_1a62b30f88d2cfbdf12632fda30baec287).
 `public `[`EventOutcome`](#classModuleOperatorInterface_1a5625e661d0c567f2274d73428eca7c7f)` `[`handleButtonEvent`](#classModuleOperatorInterface_1a62b30f88d2cfbdf12632fda30baec287)`(bool buttonState,unsigned char value)` | Handle a user interaction event (i.e. the press or release of the interface button).
 `public void `[`revertModeMaybe`](#classModuleOperatorInterface_1ac545afdf3d37c19990bd3f064ae54f4c)`()` | Revert to default operating mode if user interaction has dried up.
@@ -52,10 +52,10 @@ In a multi-mode application automatic reversion to the default mode can be confi
 
 #### `public int `[`getCurrentMode`](#classModuleOperatorInterface_1a974eefcd01d49ebd2b8b75d23fc7c2e0)`()` 
 
-Get the current operating mode.
+Get the index in the modeHandlers array of the current operating mode.
 
 #### Returns
-int - the index of current operating mode in the modeHandlers array.
+int - index of the current operating mode.
 
 #### `public unsigned long `[`getButtonPressedAt`](#classModuleOperatorInterface_1a7aecf5e1d413e91f2d7615dbe54f11b6)`()` 
 
