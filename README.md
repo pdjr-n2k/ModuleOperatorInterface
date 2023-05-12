@@ -41,11 +41,9 @@ model that is mode basedwith a basic two component data entry model in which the
 
 Create a new ModuleInterface object.
 
-The application specific work performed as a result of user interaction is performed by one or more mode handlers which are passed to this constructor method as the *modeHandlers* array. The final entry in this list of pointers to mode handlers must be followed by a pointer with the value 0.
+[ModuleOperatorInterface](#classModuleOperatorInterface) hands off application specific processing of user entered data to one or more mode handlers which must be passed to this constructor via the *modeHandlers* array. The first mode handler in the array is set as the default handler. The final mode handler entry in this array must be followed by a pointer with the value 0.
 
-[ModuleOperatorInterface](#classModuleOperatorInterface) considers the first mode handler in the array to be special: this will be established as the currently active handler by the constructor and will be the handler which is re-activated if user-interaction becomes quiescent and this behaviour is selected (see below).
-
-When a mode other than the default mode is selected by the user [ModuleOperatorInterface](#classModuleOperatorInterface) can be configured to revert to the default mode some time after user interaction dries up. The time which must elapse before this reversion is specified as *revertInterval* seconds. This argument is optional and defaults to 0 seconds which prevents automatic reversion to default mode although the user can, of course, manually select any mode they wish.
+When a mode other than the default mode is selected by the user [ModuleOperatorInterface](#classModuleOperatorInterface) can be configured to revert to the default mode some time after user interaction dries up. The time which must elapse before this reversion is specified as *revertInterval* seconds. This argument is optional and defaults to 0 seconds which prevents automatic reversion to the default mode.
 
 #### Parameters
 * `modeHandlers` - array of pointers to mode handlers which implement the [ModuleOperatorInterfaceClient](#classModuleOperatorInterfaceClient) interface. 

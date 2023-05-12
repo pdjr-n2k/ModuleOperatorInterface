@@ -86,17 +86,12 @@ class ModuleOperatorInterface {
     /**
      * @brief Create a new ModuleInterface object.
      * 
-     * The application specific work performed as a result of user
-     * interaction is performed by one or more mode handlers which are
-     * passed to this constructor method as the \a modeHandlers array.
-     * The final entry in this list of pointers to mode handlers must
-     * be followed by a pointer with the value 0.
-     *
-     * ModuleOperatorInterface considers the first mode handler in the
-     * array to be special: this will be established as the currently
-     * active handler by the constructor and will be the handler which
-     * is re-activated if user-interaction becomes quiescent and this
-     * behaviour is selected (see below).
+     * ModuleOperatorInterface hands off application specific processing
+     * of user entered data to one or more mode handlers which must be
+     * passed to this constructor via the \a modeHandlers array.
+     * The first mode handler in the array is set as the default handler.
+     * The final mode handler entry in this array must be followed by a
+     * pointer with the value 0.
      * 
      * When a mode other than the default mode is selected by the user
      * ModuleOperatorInterface can be configured to revert to the
@@ -104,8 +99,7 @@ class ModuleOperatorInterface {
      * The time which must elapse before this reversion is specified as
      * \a revertInterval seconds.
      * This argument is optional and defaults to 0 seconds which
-     * prevents automatic reversion to default mode although the user
-     * can, of course, manually select any mode they wish.
+     * prevents automatic reversion to the default mode.
      * 
      * @param modeHandlers - array of pointers to mode handlers which implement the ModuleOperatorInterfaceClient interface.
      * @param revertInterval - number of seconds that must elapse without user activity before the default mode is restored.
