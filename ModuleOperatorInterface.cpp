@@ -2,9 +2,9 @@
 #include <Button.h>
 #include <ModuleOperatorInterface.h>
   
-ModuleOperatorInterface::ModuleOperatorInterface(ModuleOperatorInterfaceClient **modeHandlers, unsigned long revertInterval) {
+ModuleOperatorInterface::ModuleOperatorInterface(ModuleOperatorInterfaceClient **modeHandlers, unsigned int revertInterval) {
   this->modeHandlers = modeHandlers;
-  this->revertInterval = revertInterval;
+  this->revertInterval = (unsigned long) (revertInterval * 1000);
   this->currentMode = 0;
   this->currentAddress = -1;
   this->buttonPressedAt = 0UL;
@@ -19,9 +19,11 @@ unsigned long ModuleOperatorInterface::getButtonPressedAt() {
 }
 
 void ModuleOperatorInterface::revertModeMaybe() {
-  if (millis() > (this->buttonPressedAt + this->revertInterval)) {
-    this->currentMode = 0;
-    this->currentAddress = -1;
+  if (this->revertInterval != 0UL) {
+    if (millis() > (this->buttonPressedAt + this->revertInterval)) {
+      this->currentMode = 0;
+      this->currentAddress = -1;
+    }
   }
 }
     

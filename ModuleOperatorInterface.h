@@ -19,6 +19,10 @@
  * based upon operation of an eight position DIL switch and momentary
  * push-buton.
  * 
+ * ModuleOperatorInterface accepts button press and release events
+ * through a call to handleButtonEvent() which takes button state and
+ * DIL switch values as its arguments.
+ * 
  * The interface supports an arbitrary number of operating modes each
  * delivered by a class that implements the
  * ModuleOperatorIbterfaceClient interface.
@@ -80,54 +84,89 @@ class ModuleOperatorInterface {
     enum EventOutcome { MODE_CHANGE, ADDRESS_ACCEPTED, ADDRESS_REJECTED, VALUE_ACCEPTED, VALUE_REJECTED };
 
     /**
-     * @brief Construct a new ModuleInterface object.
+     * @brief Create a new ModuleInterface object.
      * 
-     * @param modeHandlers   - Array of pointers to objects which
-     *                         implement the ModuleOperatorInterfaceClient
-     *                         interface in order of the mode which
-     *                         they support. The last element in the
-     *                         array must be the value 0. 
-     * @param revertInterval - Number of milliseconds that must elapse
-     *                         without a call to handleButtonEvent()
-     *                         before the current operating mode
-     *                         reverts to mode zero.
+     * The application specific work performed as a result of user
+     * interaction is performed by one or more mode handlers which are
+     * passed to this constructor method as the \a modeHandlers array.
+     * The final entry in this list of pointers to mode handlers must
+     * be followed by a pointer with the value 0.
+     *
+     * ModuleOperatorInterface considers the first mode handler in the
+     * array to be special: this will be established as the currently
+     * active handler by the constructor and will be the handler which
+     * is re-activated if user-interaction becomes quiescent and this
+     * behaviour is selected (see below).
+     * 
+     * When a mode other than the default mode is selected by the user
+     * ModuleOperatorInterface can be configured to revert to the
+     * default mode some time after user interaction dries up.
+     * The time which must elapse before this reversion is specified as
+     * \a revertInterval seconds.
+     * This argument is optional and defaults to 0 seconds which
+     * prevents automatic reversion to default mode although the user
+     * can, of course, manually select any mode they wish.
+     * 
+     * @param modeHandlers - array of pointers to mode handlers which implement the ModuleOperatorInterfaceClient interface.
+     * @param revertInterval - number of seconds that must elapse without user activity before the default mode is restored.
      */
-    ModuleOperatorInterface(ModuleOperatorInterfaceClient **modeHandlers, unsigned long revertInterval = 30000);
+    ModuleOperatorInterface(ModuleOperatorInterfaceClient **modeHandlers, unsigned int revertInterval = 0);
 
     /**
      * @brief Get the current operating mode.
      * 
-     * @return int    - the current operating mode.
+     * @return int - the index of current operating mode in the modeHandlers array.
      */
     int getCurrentMode();
 
     /**
-     * @brief Get the time in milliseconds of the last invocation of handleButtonEvent().
+     * @brief Get the time in milliseconds of the last invocation of the handleButtonEvent().
      * 
      * @return unsigned long - timetsamp in milliseconds.
      */
     unsigned long getButtonPressedAt();
 
     /**
-     * @brief Calls the an appropriate handler method for the current
-     *        operating mode.
+     * @brief Handle a user interaction event (i.e. the press or release of the interface button).
      * 
-     * This method should be called with buttonState set to either
-     * Button::PRESSED or Button::RELEASED. On a release, a long press
-     * will result in a call to the current mode handler's setAddress()
-     * method, otherwise to the current mode handler's processValue()
-     * method, but only if an address has previously been set.
+     * This method should be called with \a buttonState set to either
+     * Button::PRESSED or Button::RELEASED and, optionally, with 
+     * \a value set to the current value of the DIL switch.
      * 
-     * @param buttonState 
-     * @param value 
-     * @return int 
+     * On a button press event a timestamp is taken which allows
+     * subsequent release event to be associated with either a short
+     * or long button press.
+     * 
+     * On a button release event there are several processing options:
+     * 
+     * A **long button press** will result in \a value being
+     * passed to the current mode handler's validateAddress() method
+     * and if characterised valid being saved as an *address* for
+     * subsequent processing.
+     * In this case, the method will return one of ADDRESS_ACCEPTED
+     * or ADDRESS_REJECTED.
+     *
+     * A **short button press** consequent on a previously accepted
+     * *address* will result in a call to the current mode handler's
+     * processValue() method and, dependent upon the success or
+     * failure or this call, the return of one of VALUE_ACCEPTED or
+     * VALUE_REJECTED.
+     * 
+     * A **short button press** with no previously accepted *address*
+     * will result in cycling of the currently active mode handler and
+     * the return of MODE_CHANGE. 
+     * 
+     * @param buttonState - one of Button::PRESSED or Button::RELEASED.
+     * @param value  - either an address or a value.
+     * @return int - a value from the EventOutcome enum.
      */
     EventOutcome handleButtonEvent(bool buttonState, unsigned char value = 0);
 
     /**
-     * @brief
-     * Revert operating mode to 0 if the revert iterval has been
-     * exceeded since the last button press.
+     * @brief Revert to default operating mode if user interaction has dried up.
+     * 
+     * This method should be called from loop() to enable automatic
+     * mode reversion after the revert interval set at instantiation.
      */
     void revertModeMaybe();
     
