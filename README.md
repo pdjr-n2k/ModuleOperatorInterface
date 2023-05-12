@@ -41,7 +41,7 @@ model that is mode basedwith a basic two component data entry model in which the
 
 Create a new ModuleInterface object.
 
-The mode handlers which implement application specific processing of user entered data must be passed via the *modeHandlers* array. The first mode handler in the array is set as the default handler and the final handler in the array must be followed by a pointer with the value 0.
+One or more mode handlers which implement application specific processing of user entered data must be passed to a new ModuleOperatorInstance via the *modeHandlers* array. The first mode handler in the array is set as the default handler and the final handler in the array must be followed by a pointer with the value 0.
 
 In a multi-mode application automatic reversion to the default mode can be configured by specifying a *revertInterval* in seconds. This argument is optional and defaults to 0 seconds which disables automatic reversion.
 
@@ -74,7 +74,7 @@ On a button press event a timestamp is taken which allows subsequent release eve
 
 On a button release event there are several processing options:
 
-A **long button press** will result in *value* being passed to the current mode handler's validateAddress() method and if characterised valid being saved as an *address* for subsequent processing. In this case, the method will return one of ADDRESS_ACCEPTED or ADDRESS_REJECTED.
+A **long button press** will result in *value* being passed to the current mode handler's validateAddress() method and if characterised valid being saved as an *address* for subsequent processing. The method will return one of ADDRESS_ACCEPTED or ADDRESS_REJECTED.
 
 A **short button press** consequent on a previously accepted *address* will result in a call to the current mode handler's processValue() method and, dependent upon the success or failure or this call, the return of one of VALUE_ACCEPTED or VALUE_REJECTED.
 

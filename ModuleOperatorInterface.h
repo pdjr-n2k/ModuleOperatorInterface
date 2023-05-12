@@ -86,8 +86,9 @@ class ModuleOperatorInterface {
     /**
      * @brief Create a new ModuleInterface object.
      * 
-     * The mode handlers which implement application specific processing
-     * of user entered data must be passed via the \a modeHandlers array.
+     * One or more mode handlers which implement application specific
+     * processing of user entered data must be passed to a new
+     * ModuleOperatorInstance via the \a modeHandlers array.
      * The first mode handler in the array is set as the default handler
      * and the final handler in the array must be followed by a pointer
      * with the value 0.
@@ -134,8 +135,8 @@ class ModuleOperatorInterface {
      * passed to the current mode handler's validateAddress() method
      * and if characterised valid being saved as an *address* for
      * subsequent processing.
-     * In this case, the method will return one of ADDRESS_ACCEPTED
-     * or ADDRESS_REJECTED.
+     * The method will return one of ADDRESS_ACCEPTED or
+     * ADDRESS_REJECTED.
      *
      * A **short button press** consequent on a previously accepted
      * *address* will result in a call to the current mode handler's
