@@ -36,7 +36,7 @@ ModuleOperatorInterface::EventOutcome ModuleOperatorInterface::handleButtonEvent
   } else {
     if ((this->buttonPressedAt) && (now < (this->buttonPressedAt + 1000))) {
       if (this->currentAddress != -1) {
-        retval = (this->modeHandlers[this->currentMode]->processValue((unsigned char) this->currentAddress, value))?VALUE_ACCEPTED:VALUE_REJECTED;
+        retval = (this->modeHandlers[this->currentMode]->processValue((unsigned int) this->currentAddress, value))?VALUE_ACCEPTED:VALUE_REJECTED;
         this->currentAddress = -1;
       } else {
         this->currentMode++;
@@ -44,8 +44,8 @@ ModuleOperatorInterface::EventOutcome ModuleOperatorInterface::handleButtonEvent
         retval = MODE_CHANGE;
       }
     } else {
-      if (this->modeHandlers[this->currentMode]->validateAddress(value)) {
-        this->currentAddress = value;
+      if (this->modeHandlers[this->currentMode]->validateAddress((unsigned int) value)) {
+        this->currentAddress = (int) value;
         retval = ADDRESS_ACCEPTED;
       } else {
         this->currentAddress = -1;
